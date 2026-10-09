@@ -1,0 +1,18 @@
+#include <stdio.h>
+#include <pthread.h>
+pthread_mutex_t fork1=PTHREAD_MUTEX_INITIALIZER;
+void *eat(void *p) {
+    pthread_mutex_lock(&fork1);
+    printf("Philosopher %ld is eating\n",(long)p);
+    pthread_mutex_unlock(&fork1);
+    return NULL;
+}
+int main() {
+    pthread_t t[2];
+    pthread_create(&t[0],NULL,eat,(void *)1);
+    pthread_create(&t[1],NULL,eat,(void *)2);
+    pthread_join(t[0],NULL);
+    pthread_join(t[1],NULL);
+    return 0;
+}
+
