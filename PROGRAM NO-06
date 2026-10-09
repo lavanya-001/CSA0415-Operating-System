@@ -1,0 +1,22 @@
+#include <stdio.h>
+int main() {
+    int n,i,t=0,done=0,b[10],r[10],p[10],k;
+    printf("Enter number of processes: ");
+    scanf("%d",&n);
+    for(i=0;i<n;i++) {
+        printf("Enter burst time and priority: ");
+        scanf("%d%d",&b[i],&p[i]);
+        r[i]=b[i];
+    }
+    while(done<n) {
+        k=-1;
+        for(i=0;i<n;i++)
+            if(r[i]>0 && (k==-1 || p[i]<p[k])) k=i;
+        if(k==-1) break;
+        r[k]--; t++;
+        if(r[k]==0) done++;
+    }
+    printf("Total execution time = %d",t);
+    return 0;
+}
+
