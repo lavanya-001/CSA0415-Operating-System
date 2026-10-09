@@ -1,0 +1,19 @@
+#include <stdio.h>
+#include <pthread.h>
+int x=0;
+pthread_mutex_t m=PTHREAD_MUTEX_INITIALIZER;
+void *fun(void *p) {
+    pthread_mutex_lock(&m);
+    x++;
+    printf("%d\n",x);
+    pthread_mutex_unlock(&m);
+    return NULL;
+}
+int main() {
+    pthread_t a,b;
+    pthread_create(&a,NULL,fun,NULL);
+    pthread_create(&b,NULL,fun,NULL);
+    pthread_join(a,NULL);
+    pthread_join(b,NULL);
+    return 0;
+}
