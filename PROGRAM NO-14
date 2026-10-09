@@ -1,0 +1,14 @@
+#include <stdio.h>
+int main() {
+    char f[10][30];
+    int n,i;
+    printf("Enter number of files: ");
+    scanf("%d",&n);
+    for(i=0;i<n;i++) {
+        printf("Enter filename: ");
+        scanf("%29s",f[i]);
+    }
+    printf("Files:\n");
+    for(i=0;i<n;i++) printf("%s\n",f[i]);
+    return 0;
+}
