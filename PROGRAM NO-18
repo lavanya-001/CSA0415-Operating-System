@@ -1,0 +1,25 @@
+#include <stdio.h>
+#include <pthread.h>
+int x;
+pthread_mutex_t m=PTHREAD_MUTEX_INITIALIZER;
+void *producer(void *p) {
+    pthread_mutex_lock(&m);
+    x=10;
+    printf("Produced: %d\n",x);
+    pthread_mutex_unlock(&m);
+    return NULL;
+}
+void *consumer(void *p) {
+    pthread_mutex_lock(&m);
+    printf("Consumed: %d\n",x);
+    pthread_mutex_unlock(&m);
+    return NULL;
+}
+int main() {
+    pthread_t a,b;
+    pthread_create(&a,NULL,producer,NULL);
+    pthread_join(a,NULL);
+    pthread_create(&b,NULL,consumer,NULL);
+    pthread_join(b,NULL);
+    return 0;
+}
