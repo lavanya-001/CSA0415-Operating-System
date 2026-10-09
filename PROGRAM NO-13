@@ -1,0 +1,16 @@
+#include <stdio.h>
+int main() {
+    int b[10],n,i,p,s;
+    printf("Enter number of blocks: ");
+    scanf("%d",&n);
+    for(i=0;i<n;i++) scanf("%d",&b[i]);
+    printf("Enter process size: ");
+    scanf("%d",&p);
+    for(i=0;i<n;i++)
+        if(b[i]>=p) {
+            printf("Allocated to block %d",i+1);
+            return 0;
+        }
+    printf("Not allocated");
+    return 0;
+}
