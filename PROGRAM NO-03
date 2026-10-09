@@ -1,0 +1,23 @@
+#include <stdio.h>
+int main()
+{
+    int n, i, bt[10], wt=0, tat;
+    float awt=0, atat=0;
+
+    scanf("%d", &n);
+    for(i=0;i<n;i++)
+        scanf("%d", &bt[i]);
+
+    printf("P\tBT\tWT\tTAT\n");
+    for(i=0;i<n;i++)
+    {
+        tat=wt+bt[i];
+        printf("P%d\t%d\t%d\t%d\n",i+1,bt[i],wt,tat);
+        awt+=wt;
+        atat+=tat;
+        wt+=bt[i];
+    }
+
+    printf("AWT=%.2f\nATT=%.2f",awt/n,atat/n);
+    return 0;
+
