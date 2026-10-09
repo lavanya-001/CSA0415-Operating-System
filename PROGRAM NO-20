@@ -1,0 +1,25 @@
+#include <stdio.h>
+#include <pthread.h>
+int data=10;
+pthread_mutex_t m=PTHREAD_MUTEX_INITIALIZER;
+void *read(void *p) {
+    pthread_mutex_lock(&m);
+    printf("Read: %d\n",data);
+    pthread_mutex_unlock(&m);
+    return NULL;
+}
+void *write(void *p) {
+    pthread_mutex_lock(&m);
+    data=20;
+    printf("Written: %d\n",data);
+    pthread_mutex_unlock(&m);
+    return NULL;
+}
+int main() {
+    pthread_t r,w;
+    pthread_create(&w,NULL,write,NULL);
+    pthread_join(w,NULL);
+    pthread_create(&r,NULL,read,NULL);
+    pthread_join(r,NULL);
+    return 0;
+}
