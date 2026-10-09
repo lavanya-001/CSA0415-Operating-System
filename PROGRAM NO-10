@@ -1,0 +1,20 @@
+#include <stdio.h>
+#include <sys/ipc.h>
+#include <sys/msg.h>
+#include <string.h>
+struct msg {
+    long type;
+    char text[50];
+};
+int main() {
+    struct msg m;
+    int q=msgget(IPC_PRIVATE,0600|IPC_CREAT);
+    m.type=1;
+    printf("Enter message: ");
+    fgets(m.text,50,stdin);
+    msgsnd(q,&m,sizeof(m.text),0);
+    msgrcv(q,&m,sizeof(m.text),1,0);
+    printf("Received: %s",m.text);
+    msgctl(q,IPC_RMID,NULL);
+    return 0;
+}
