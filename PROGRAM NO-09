@@ -1,0 +1,18 @@
+#include <stdio.h>
+#include <sys/mman.h>
+#include <sys/wait.h>
+#include <unistd.h>
+int main() {
+    int *p=mmap(NULL,sizeof(int),3,0x21,-1,0);
+    if(p==MAP_FAILED) return 1;
+    *p=10;
+    if(fork()==0) {
+        *p=20;
+    } else {
+        wait(NULL);
+        printf("Shared value = %d\n",*p);
+    }
+    munmap(p,sizeof(int));
+    return 0;
+}
+
