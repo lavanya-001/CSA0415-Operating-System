@@ -1,0 +1,35 @@
+1.mkdir -p ~/OS-Lab/Experiment-11
+2.cd ~/OS-Lab/Experiment-11
+3.nano commands.txt
+--# Experiment 11 - Pipelines and Redirection
+
+# 1. Create a sample file
+echo "Operating System Lab" > sample.txt
+
+# 2. Display file contents
+cat sample.txt
+
+# 3. Append text
+echo "Linux Commands" >> sample.txt
+
+# 4. Display updated contents
+cat sample.txt
+
+# 5. Input redirection
+wc -w < sample.txt
+
+# 6. Output redirection
+ls -l > output.txt
+
+# 7. Display output
+cat output.txt
+
+# 8. Command pipeline
+ls -l | grep ".txt"
+
+# 9. Count files
+ls | wc -l
+
+# 10. Search using grep
+cat sample.txt | grep "Linux"
+4.ls
