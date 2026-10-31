@@ -1,0 +1,18 @@
+pwd 
+mkdir -p college/dept
+ls -l
+cd college 
+touch notes.txt 
+echo "Operating Systems Lab" > notes.txt
+cat notes.txt 
+cp notes.txt copy.txt 
+mv copy.txt dept/lab.txt 
+ls -R
+mv notes.txt os_notes.txt 
+ls
+rm dept/lab.txt
+rmdir dept
+ls -l
+cd ..
+rm -r college 
+ls 
