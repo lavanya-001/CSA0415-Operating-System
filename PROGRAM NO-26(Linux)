@@ -1,0 +1,14 @@
+mkdir -p ~/OS-Lab/Experiment-06
+cd ~/OS-Lab/Experiment-06
+ps aux
+pstree
+top
+echo $$
+who
+ps aux | grep firefox
+jobs
+uptime
+ps -ef
+ps aux | head -10
+nano commands.txt
+cat commands.txt
