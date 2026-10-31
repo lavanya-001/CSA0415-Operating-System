@@ -1,0 +1,58 @@
+mkdir -p ~/OS-Lab/Experiment-03
+cd ~/OS-Lab/Experiment-03
+nano variables.sh
+(#!/bin/bash
+
+echo "================================"
+echo "   VARIABLES AND OPERATORS"
+echo "================================"
+
+echo "Enter first number:"
+read a
+
+echo "Enter second number:"
+read b
+
+echo ""
+echo "First number: $a"
+echo "Second number: $b"
+
+echo ""
+echo "========== ARITHMETIC OPERATIONS =========="
+
+echo "Addition: $((a + b))"
+echo "Subtraction: $((a - b))"
+echo "Multiplication: $((a * b))"
+
+if [ "$b" -ne 0 ]; then
+    echo "Division: $((a / b))"
+    echo "Modulus: $((a % b))"
+else
+    echo "Division and modulus are not possible by zero."
+fi
+
+echo ""
+echo "========== COMPARISON =========="
+
+if [ "$a" -gt "$b" ]; then
+    echo "$a is greater than $b"
+elif [ "$a" -lt "$b" ]; then
+    echo "$a is less than $b"
+else
+    echo "Both numbers are equal"
+fi
+
+echo ""
+echo "========== ASSIGNMENT OPERATOR =========="
+
+c=$a
+c=$((c + b))
+
+echo "After adding both numbers, c = $c"
+
+echo ""
+echo "Program completed successfully.")
+chmod +x variables.sh
+./variables.sh
+First number: 20
+Second number: 10
