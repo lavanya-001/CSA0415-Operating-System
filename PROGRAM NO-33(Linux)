@@ -1,0 +1,58 @@
+1.mkdir -p ~/OS-Lab/Experiment-13
+2.cd ~/OS-Lab/Experiment-13
+3.nano file_permission.c
+--#include <stdio.h>
+#include <stdlib.h>
+#include <sys/stat.h>
+#include <unistd.h>
+
+int main()
+{
+    struct stat fileInfo;
+    FILE *fp;
+
+    fp = fopen("sample.txt", "w");
+
+    if (fp == NULL)
+    {
+        perror("File creation failed");
+        return 1;
+    }
+
+    fprintf(fp, "Operating System Lab");
+    fclose(fp);
+
+    printf("FILE METADATA AND PERMISSION MODIFICATION\n");
+
+    if (stat("sample.txt", &fileInfo) == -1)
+    {
+        perror("stat failed");
+        return 1;
+    }
+
+    printf("\nBefore Permission Change:\n");
+    printf("File Size: %ld bytes\n", (long)fileInfo.st_size);
+    printf("File Permissions: %04o\n", fileInfo.st_mode & 0777);
+
+    if (chmod("sample.txt", 0600) == -1)
+    {
+        perror("chmod failed");
+        return 1;
+    }
+
+    if (stat("sample.txt", &fileInfo) == -1)
+    {
+        perror("stat failed");
+        return 1;
+    }
+
+    printf("\nAfter Permission Change:\n");
+    printf("File Permissions: %04o\n", fileInfo.st_mode & 0777);
+
+    printf("\nFile permission modified successfully.\n");
+
+    return 0;
+}
+4.gcc file_permission.c -o file_permission
+5../file_permission
+6.ls -l
