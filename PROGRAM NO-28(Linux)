@@ -1,0 +1,48 @@
+mkdir -p ~/OS-Lab/Experiment-08
+cd ~/OS-Lab/Experiment-08
+nano fork_exec.c
+(#include <stdio.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/wait.h>
+#include <stdlib.h>
+
+int main()
+{
+    pid_t pid;
+
+    printf("Parent Process Started\n");
+    printf("Parent Process ID: %d\n", getpid());
+
+    pid = fork();
+
+    if (pid < 0)
+    {
+        printf("Process creation failed\n");
+        return 1;
+    }
+    else if (pid == 0)
+    {
+        printf("\nChild Process Created\n");
+        printf("Child Process ID: %d\n", getpid());
+
+        printf("\nExecuting ls command using exec()\n");
+
+        execlp("ls", "ls", "-l", NULL);
+
+        perror("exec failed");
+        exit(1);
+    }
+    else
+    {
+        wait(NULL);
+
+        printf("\nChild process completed\n");
+        printf("Parent Process ID: %d\n", getpid());
+    }
+
+    return 0;
+})
+gcc fork_exec.c -o fork_exec
+./fork_exec
+ls
