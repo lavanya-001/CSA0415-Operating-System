@@ -1,0 +1,40 @@
+mkdir -p ~/OS-Lab/Experiment-05
+cd ~/OS-Lab/Experiment-05
+nano loops.sh
+(#!/bin/bash
+
+echo "================================"
+echo "       LOOPING STATEMENTS"
+echo "================================"
+
+echo ""
+echo "FOR LOOP:"
+for i in 1 2 3 4 5
+do
+    echo "Number: $i"
+done
+
+echo ""
+echo "WHILE LOOP:"
+count=1
+
+while [ $count -le 5 ]
+do
+    echo "Count: $count"
+    count=$((count + 1))
+done
+
+echo ""
+echo "UNTIL LOOP:"
+num=1
+
+until [ $num -gt 5 ]
+do
+    echo "Value: $num"
+    num=$((num + 1))
+done
+
+echo ""
+echo "All loops executed successfully.")
+chmod +x loops.sh
+./loops.sh
