@@ -1,0 +1,39 @@
+mkdir -p ~/OS-Lab/Experiment-04
+cd ~/OS-Lab/Experiment-04
+nano conditional.sh
+(#!/bin/bash
+
+echo "================================"
+echo "    CONDITIONAL STATEMENTS"
+echo "================================"
+
+echo "Enter a number:"
+read num
+
+echo ""
+echo "Checking the number..."
+
+# if-elif-else statement
+if [ "$num" -gt 0 ]; then
+    echo "$num is a Positive number"
+
+elif [ "$num" -lt 0 ]; then
+    echo "$num is a Negative number"
+
+else
+    echo "The number is Zero"
+fi
+
+echo ""
+echo "Checking Even or Odd..."
+
+# if-else statement
+if [ $((num % 2)) -eq 0 ]; then
+    echo "$num is an Even number"
+else
+    echo "$num is an Odd number"
+fi
+echo ""
+echo "Program completed successfully.")
+chmod +x conditional.sh
+./conditional.sh
