@@ -1,0 +1,61 @@
+mkdir -p ~/OS-Lab/Experiment-10
+cd ~/OS-Lab/Experiment-10
+nano backup.sh
+(#!/bin/bash
+
+SOURCE="$HOME/OS-Lab/Experiment-10/data"
+BACKUP="$HOME/OS-Lab/Experiment-10/backups"
+RESTORE="$HOME/OS-Lab/Experiment-10/recovered"
+
+mkdir -p "$SOURCE" "$BACKUP" "$RESTORE"
+
+echo "===================================="
+echo "   AUTOMATED BACKUP AND RECOVERY"
+echo "===================================="
+
+echo "1. Create Backup"
+echo "2. Recover Backup"
+echo "3. Exit"
+
+echo ""
+read -p "Enter your choice: " choice
+
+case $choice in
+
+1)
+    DATE=$(date +%Y%m%d_%H%M%S)
+    FILE="$BACKUP/backup_$DATE.tar.gz"
+
+    tar -czf "$FILE" -C "$(dirname "$SOURCE")" "$(basename "$SOURCE")"
+
+    if [ $? -eq 0 ]; then
+        echo "Backup created successfully!"
+        echo "Backup location: $FILE"
+    else
+        echo "Backup failed!"
+    fi
+    ;;
+
+2)
+    LATEST=$(ls -t "$BACKUP"/backup_*.tar.gz 2>/dev/null | head -1)
+
+    if [ -f "$LATEST" ]; then
+        tar -xzf "$LATEST" -C "$RESTORE"
+        echo "Recovery completed successfully!"
+        echo "Recovered files: $RESTORE"
+    else
+        echo "No backup file found!"
+    fi
+    ;;
+
+3)
+    echo "Exiting program."
+    ;;
+
+*)
+    echo "Invalid choice!"
+    ;;
+
+esac)
+echo "Operating System Backup Test" > data/sample.txt
+./backup.sh
