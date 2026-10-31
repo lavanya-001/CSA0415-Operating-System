@@ -1,0 +1,56 @@
+cd ~/OS-Lab/Experiment-02
+nano system_info.sh
+(#!/bin/bash
+
+echo "=================================="
+echo "       SYSTEM INFORMATION"
+echo "=================================="
+
+echo "Date and Time:"
+date
+
+echo "Current User:"
+whoami
+
+echo "Hostname:"
+hostname
+
+echo "Operating System:"
+uname -o
+
+echo "Kernel Version:"
+uname -r
+
+echo "System Uptime:"
+uptime
+
+echo "=================================="
+echo "          CPU INFORMATION"
+echo "=================================="
+
+lscpu | grep "Model name"
+
+echo "=================================="
+echo "          MEMORY USAGE"
+echo "=================================="
+
+free -h
+
+echo "=================================="
+echo "           DISK USAGE"
+echo "=================================="
+
+df -h
+
+echo "=================================="
+echo "        RUNNING PROCESSES"
+echo "=================================="
+
+ps aux | head -10
+
+echo "=================================="
+echo "    SYSTEM MONITORING COMPLETED"
+echo "==================================")
+chmod +x system_info.sh
+./system_info.sh
+cat system_info.sh
