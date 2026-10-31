@@ -1,0 +1,25 @@
+mkdir -p ~/OS-Lab/Experiment-14
+cd ~/OS-Lab/Experiment-14
+nano file_management.sh
+[#!/bin/bash
+
+echo "FILE AND DIRECTORY MANAGEMENT"
+
+mkdir -p MyFolder
+touch MyFolder/sample.txt
+echo "Operating System Lab" > MyFolder/sample.txt
+cat MyFolder/sample.txt
+cp MyFolder/sample.txt copy.txt
+mv copy.txt MyFolder/moved.txt
+ls -l MyFolder
+mv MyFolder/moved.txt MyFolder/renamed.txt
+ls -l MyFolder
+grep "Operating" MyFolder/sample.txt
+file MyFolder/sample.txt
+rm MyFolder/renamed.txt
+
+echo "File operations completed successfully."]
+chmod +x file_management.sh
+./file_management.sh
+ls -l
+ls -l MyFolder
