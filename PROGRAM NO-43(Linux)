@@ -1,0 +1,56 @@
+mkdir -p ~/OS-Lab/Experiment-23
+cd ~/OS-Lab/Experiment-23
+
+cat > priority.c <<'EOF'
+#include <stdio.h>
+
+int main() {
+    int n, i, j, time = 0, completed = 0;
+    int at[20], bt[20], pr[20], ct[20], tat[20], wt[20], done[20] = {0};
+    int pos, highest;
+
+    printf("Enter number of processes: ");
+    scanf("%d", &n);
+
+    for (i = 0; i < n; i++) {
+        printf("Enter arrival time, burst time and priority for P%d: ", i + 1);
+        scanf("%d %d %d", &at[i], &bt[i], &pr[i]);
+    }
+
+    printf("\nProcess\tAT\tBT\tPriority\tCT\tTAT\tWT\n");
+
+    while (completed < n) {
+        pos = -1;
+        highest = 9999;
+
+        for (i = 0; i < n; i++) {
+            if (!done[i] && at[i] <= time && pr[i] < highest) {
+                highest = pr[i];
+                pos = i;
+            }
+        }
+
+        if (pos == -1) {
+            time++;
+            continue;
+        }
+
+        time += bt[pos];
+        ct[pos] = time;
+        tat[pos] = ct[pos] - at[pos];
+        wt[pos] = tat[pos] - bt[pos];
+        done[pos] = 1;
+        completed++;
+
+        printf("P%d\t%d\t%d\t%d\t\t%d\t%d\t%d\n",
+               pos + 1, at[pos], bt[pos], pr[pos],
+               ct[pos], tat[pos], wt[pos]);
+    }
+
+    return 0;
+}
+EOF
+
+gcc priority.c -o priority
+./priority
+ls -l
