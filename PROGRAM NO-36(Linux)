@@ -1,0 +1,45 @@
+mkdir -p ~/OS-Lab/Experiment-16
+cd ~/OS-Lab/Experiment-16
+
+cat > process_creation.c <<'EOF'
+#include <stdio.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/wait.h>
+#include <stdlib.h>
+
+int main()
+{
+    pid_t pid;
+
+    printf("Process Creation Using fork() System Call\n");
+    fflush(stdout);
+
+    pid = fork();
+
+    if (pid < 0)
+    {
+        perror("Fork failed");
+        return 1;
+    }
+    else if (pid == 0)
+    {
+        printf("\nChild Process\n");
+        printf("Child Process ID: %d\n", getpid());
+        printf("Parent Process ID: %d\n", getppid());
+    }
+    else
+    {
+        wait(NULL);
+        printf("\nParent Process\n");
+        printf("Parent Process ID: %d\n", getpid());
+        printf("Child Process ID: %d\n", pid);
+    }
+
+    return 0;
+}
+EOF
+
+gcc process_creation.c -o process_creation
+./process_creation
+ls -l
