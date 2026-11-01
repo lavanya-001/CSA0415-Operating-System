@@ -1,0 +1,57 @@
+mkdir -p ~/OS-Lab/Experiment-15
+cd ~/OS-Lab/Experiment-15
+nano system_admin.sh
+(#!/bin/bash
+
+while true
+do
+    echo ""
+    echo "===================================="
+    echo " LINUX SYSTEM ADMINISTRATION UTILITY"
+    echo "===================================="
+    echo "1. Display Date and Time"
+    echo "2. Display User Information"
+    echo "3. Display Disk Usage"
+    echo "4. Display Memory Usage"
+    echo "5. Display CPU Information"
+    echo "6. Display Running Processes"
+    echo "7. Display Network Information"
+    echo "8. Exit"
+
+    echo ""
+    read -p "Enter your choice: " choice
+
+    case $choice in
+        1)
+            date
+            ;;
+        2)
+            whoami
+            id
+            ;;
+        3)
+            df -h
+            ;;
+        4)
+            free -h
+            ;;
+        5)
+            lscpu
+            ;;
+        6)
+            ps aux | head -10
+            ;;
+        7)
+            ip addr
+            ;;
+        8)
+            echo "Exiting the program."
+            break
+            ;;
+        *)
+            echo "Invalid choice. Try again."
+            ;;
+    esac
+done)
+chmod +x system_admin.sh
+./system_admin.sh
