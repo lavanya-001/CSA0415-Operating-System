@@ -1,0 +1,76 @@
+mkdir -p ~/OS-Lab/Experiment-27
+cd ~/OS-Lab/Experiment-27
+
+cat > mlfq.c <<'EOF'
+#include <stdio.h>
+
+int main() {
+    int n, i, time = 0;
+    int bt[20], rt[20], ct[20], tat[20], wt[20];
+
+    printf("Enter number of processes: ");
+    scanf("%d", &n);
+
+    for (i = 0; i < n; i++) {
+        printf("Enter burst time for P%d: ", i + 1);
+        scanf("%d", &bt[i]);
+        rt[i] = bt[i];
+    }
+
+    // Queue 1: Time quantum = 2
+    // Queue 2: Time quantum = 4
+    // Queue 3: FCFS
+
+    for (i = 0; i < n; i++) {
+        int q = 2;
+        if (rt[i] > 0) {
+            if (rt[i] > q) {
+                time += q;
+                rt[i] -= q;
+            } else {
+                time += rt[i];
+                rt[i] = 0;
+                ct[i] = time;
+            }
+        }
+    }
+
+    for (i = 0; i < n; i++) {
+        int q = 4;
+        if (rt[i] > 0) {
+            if (rt[i] > q) {
+                time += q;
+                rt[i] -= q;
+            } else {
+                time += rt[i];
+                rt[i] = 0;
+                ct[i] = time;
+            }
+        }
+    }
+
+    for (i = 0; i < n; i++) {
+        if (rt[i] > 0) {
+            time += rt[i];
+            rt[i] = 0;
+            ct[i] = time;
+        }
+    }
+
+    printf("\nProcess\tBT\tCT\tTAT\tWT\n");
+
+    for (i = 0; i < n; i++) {
+        tat[i] = ct[i];
+        wt[i] = tat[i] - bt[i];
+
+        printf("P%d\t%d\t%d\t%d\t%d\n",
+               i + 1, bt[i], ct[i], tat[i], wt[i]);
+    }
+
+    return 0;
+}
+EOF
+
+gcc mlfq.c -o mlfq
+./mlfq
+ls -l
