@@ -1,0 +1,51 @@
+mkdir -p ~/OS-Lab/Experiment-28
+cd ~/OS-Lab/Experiment-28
+
+cat > scheduling_comparison.c <<'EOF'
+#include <stdio.h>
+
+int main() {
+    int n, i, time = 0;
+    int bt[20], wt[20], tat[20], rt[20], ct[20];
+    float avgWT = 0, avgTAT = 0, avgRT = 0;
+
+    printf("Enter number of processes: ");
+    scanf("%d", &n);
+
+    for (i = 0; i < n; i++) {
+        printf("Enter burst time for P%d: ", i + 1);
+        scanf("%d", &bt[i]);
+    }
+
+    // FCFS scheduling
+    for (i = 0; i < n; i++) {
+        rt[i] = time;
+        wt[i] = time;
+        time += bt[i];
+        ct[i] = time;
+        tat[i] = ct[i];
+    }
+
+    printf("\nFCFS Scheduling Results\n");
+    printf("Process\tBT\tWT\tTAT\tRT\n");
+
+    for (i = 0; i < n; i++) {
+        printf("P%d\t%d\t%d\t%d\t%d\n",
+               i + 1, bt[i], wt[i], tat[i], rt[i]);
+
+        avgWT += wt[i];
+        avgTAT += tat[i];
+        avgRT += rt[i];
+    }
+
+    printf("\nAverage Waiting Time: %.2f", avgWT / n);
+    printf("\nAverage Turnaround Time: %.2f", avgTAT / n);
+    printf("\nAverage Response Time: %.2f\n", avgRT / n);
+
+    return 0;
+}
+EOF
+
+gcc scheduling_comparison.c -o scheduling_comparison
+./scheduling_comparison
+ls -l
