@@ -1,0 +1,48 @@
+mkdir -p ~/OS-Lab/Experiment-18
+cd ~/OS-Lab/Experiment-18
+nano process_sync.c
+(#include <stdio.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/wait.h>
+#include <stdlib.h>
+
+int main()
+{
+    pid_t pid;
+
+    printf("Parent Process Started\n");
+
+    pid = fork();
+
+    if (pid < 0)
+    {
+        perror("Fork failed");
+        return 1;
+    }
+    else if (pid == 0)
+    {
+        printf("\nChild Process Started\n");
+        printf("Child Process ID: %d\n", getpid());
+
+        sleep(2);
+
+        printf("Child Process Completed\n");
+        exit(0);
+    }
+    else
+    {
+        printf("Parent is waiting for child process...\n");
+
+        wait(NULL);
+
+        printf("\nParent Process Resumed\n");
+        printf("Parent Process ID: %d\n", getpid());
+        printf("Child process finished successfully\n");
+    }
+
+    return 0;
+})
+gcc process_sync.c -o process_sync
+./process_sync
+ls -l
