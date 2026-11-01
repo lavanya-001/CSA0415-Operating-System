@@ -1,0 +1,24 @@
+mkdir -p ~/OS-Lab/Experiment-17
+cd ~/OS-Lab/Experiment-17
+nano exec_demo.c
+#include <stdio.h>
+#include <unistd.h>
+#include <stdlib.h>
+
+int main()
+{
+    printf("Program Execution Using exec() System Call\n");
+
+    printf("\nBefore executing another program\n");
+
+    printf("\nExecuting ls command...\n");
+
+    execlp("ls", "ls", "-l", NULL);
+
+    perror("exec failed");
+
+    return 1;
+}
+gcc exec_demo.c -o exec_demo
+./exec_demo
+ls -l
