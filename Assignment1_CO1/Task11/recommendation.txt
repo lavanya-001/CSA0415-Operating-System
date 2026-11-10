@@ -1,0 +1,29 @@
+SMART HOSPITAL OPERATING SYSTEM RECOMMENDATION
+
+1. Patient Monitors:
+Use Hard Real-Time Operating System.
+
+2. Nurses Tablets:
+Use Handheld Operating System.
+
+3. Doctors Workstations:
+Use Desktop Operating System.
+
+4. Database Server:
+Use Clustered Operating System with Failover.
+
+5. MRI Imaging Server:
+Use Multiprocessor Operating System.
+
+6. Partner Hospitals:
+Use Distributed Operating System.
+
+Security:
+Use authentication, access control and encryption.
+
+Reliability:
+Use backup systems and failover.
+
+Conclusion:
+A combination of different operating systems is
+the best solution for the Smart Hospital.

@@ -1,0 +1,25 @@
+# TASK 12 – RE-EVALUATE AND ADAPT THE DESIGN
+
+## A. Impact Analysis
+
+Remote patient monitoring requires secure internet communication. Cloud-based records require better data sharing, security and reliability.
+
+## B. Evaluation of Original Design
+
+The original design supports hospital devices effectively. However, remote monitoring and cloud storage need additional security and network support.
+
+## C. Adaptation or Redesign
+
+1. Home monitoring devices – Embedded Real-Time OS.
+2. Patient records – Cloud-based database.
+3. Partner hospitals – Distributed Operating System.
+4. Security – Authentication and encryption.
+5. Reliability – Regular backups and failover systems.
+
+## D. Evidence-Based Defence
+
+The modified design provides better communication, scalability, security and reliability. Real-time operating systems help monitor patients, while cloud services support sharing medical records.
+
+## Conclusion
+
+The original design should be MODIFIED to support remote patient monitoring and cloud-based patient records.
